@@ -104,40 +104,50 @@ const GameScreen = () => {
   ];
 
   const handleButtonClick = (type) => {
-    if (type === "false" && trueClicks < 3) {
-      if (falseClicks > 0) {
-        setFalseClicks(0);
-        setGrYOffsets([0, 0, 0]);
-        setBubbleYOffset(0);
-        setBubbleSide(null);
-      }
-      setTrueClicks((prev) => prev + 1);
-      setRrYOffsets((prev) => [prev[0] - 70, prev[1] - 65, prev[2] - 105]);
-      setBubbleSide("left");
-      setBubbleYOffset((prev) => prev - 50);
-    } else if (type === "true" && falseClicks < 3) {
-      if (trueClicks > 0) {
-        setTrueClicks(0);
-        setRrYOffsets([0, 0, 0]);
-        setBubbleYOffset(0);
-        setBubbleSide(null);
-      }
-      setFalseClicks((prev) => prev + 1);
-      setGrYOffsets((prev) => [prev[0] - 75, prev[1] - 70, prev[2] - 105]);
-      setBubbleSide("right");
-      setBubbleYOffset((prev) => prev - 50);
+    if (isSettled) return;
+
+    const isfalseAction = type === "false";
+    const currentCounter = isfalseAction ? trueClicks : falseClicks;
+    const oppositeCounter = isfalseAction ? falseClicks : trueClicks;
+
+    if (currentCounter >= 3) return;
+
+    if (oppositeCounter > 0) {
+      setTrueClicks(0);
+      setFalseClicks(0);
+      setRrYOffsets([0, 0, 0]);
+      setGrYOffsets([0, 0, 0]);
+      setBubbleYOffset(0);
+      setBubbleSide(null);
     }
 
-    if (trueClicks + 1 === 3 || falseClicks + 1 === 3) {
+    const updateCounter = isfalseAction ? setTrueClicks : setFalseClicks;
+    updateCounter((prev) => prev + 1);
+
+    const offsetUpdates = isfalseAction ? [-70, -65, -105] : [-75, -70, -105];
+
+    const updateOffsets = isfalseAction ? setRrYOffsets : setGrYOffsets;
+    updateOffsets((prev) => [
+      prev[0] + offsetUpdates[0],
+      prev[1] + offsetUpdates[1],
+      prev[2] + offsetUpdates[2]
+    ]);
+
+    setBubbleSide(isfalseAction ? "left" : "right");
+    setBubbleYOffset((prev) => prev - 50);
+
+    if (currentCounter + 1 === 3) {
       setIsSettled(true);
       setBubbleSide(null);
-      setTimeout(() => {
+
+      const completionTimeout = setTimeout(() => {
         setQs1Text(
-          trueClicks + 1 === 3
+          isfalseAction
             ? "<span class='text-yellow-500 text-3xl changa-one-regular'>You got 0 coin</span><br/><span class='text-5xl font-extrabold bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Noooo!!</span>"
             : "<span class='text-yellow-500 text-3xl changa-one-regular'>You got 1 coin</span><br/><span class='text-5xl font-extrabold bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Congratulations</span>"
         );
-        setTimeout(() => {
+
+        const resetTimeout = setTimeout(() => {
           setTrueClicks(0);
           setFalseClicks(0);
           setRrYOffsets([0, 0, 0]);
@@ -145,9 +155,12 @@ const GameScreen = () => {
           setQs1Text("The Sun is the closest star to Earth?");
           setIsSettled(false);
           setBubbleYOffset(0);
-          setBubbleSide(null);
-        }, 3000);
+        }, 4000);
+
+        return () => clearTimeout(resetTimeout);
       }, 1000);
+
+      return () => clearTimeout(completionTimeout);
     }
   };
 
