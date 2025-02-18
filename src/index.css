@@ -1,4 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Alkalami&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Changa+One&display=swap");
 @import "tailwindcss";
+
+.alkalami-regular {
+  font-family: "Alkalami", serif;
+}
+
+.stroke-custom {
+  -webkit-text-stroke: 1px var(--stroke-color, #9c2d0c);
+  paint-order: stroke fill;
+  color: white;
+}
+
+.changa-one-regular {
+  font-family: "Changa One", serif;
+}
 
 @plugin "tailwindcss-animate";
 

@@ -48,7 +48,9 @@ const GameScreen = () => {
   const [falseClicks, setFalseClicks] = useState(0);
   const [rrYOffsets, setRrYOffsets] = useState([0, 0, 0]);
   const [grYOffsets, setGrYOffsets] = useState([0, 0, 0]);
-  const [qs1Image, setQs1Image] = useState("/qs1.png");
+  const [qs1Text, setQs1Text] = useState(
+    "The Sun is the closest star to Earth?"
+  );
   const [isSettled, setIsSettled] = useState(false);
   const [bubbleYOffset, setBubbleYOffset] = useState(0);
   const [bubbleSide, setBubbleSide] = useState(null);
@@ -130,15 +132,17 @@ const GameScreen = () => {
       setIsSettled(true);
       setBubbleSide(null);
       setTimeout(() => {
-        setQs1Image(
-          trueClicks + 1 === 3 ? "/endscreenf.png" : "/endscreent.png"
+        setQs1Text(
+          trueClicks + 1 === 3
+            ? "<span class='text-yellow-500 text-3xl changa-one-regular'>You got 0 coin</span><br/><span class='text-5xl font-extrabold bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Noooo!!</span>"
+            : "<span class='text-yellow-500 text-3xl changa-one-regular'>You got 1 coin</span><br/><span class='text-5xl font-extrabold bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Congratulations</span>"
         );
         setTimeout(() => {
           setTrueClicks(0);
           setFalseClicks(0);
           setRrYOffsets([0, 0, 0]);
           setGrYOffsets([0, 0, 0]);
-          setQs1Image("/qs1.png");
+          setQs1Text("The Sun is the closest star to Earth?");
           setIsSettled(false);
           setBubbleYOffset(0);
           setBubbleSide(null);
@@ -152,10 +156,10 @@ const GameScreen = () => {
       className="mx-auto w-full max-w-[393px] h-[calc(100vw*(852/393))] max-h-[852px] bg-cover bg-no-repeat bg-center relative transition-opacity duration-500"
       style={{ backgroundImage: "url('/playpage.png')" }}
     >
-      <img
-        src={qs1Image}
-        alt="Question 1"
-        className="absolute left-1/2 -translate-x-1/2 top-[15%]"
+      <div
+        className="stroke-custom absolute left-1/2 w-90 h-60 -translate-x-1/2 top-[15%] text-center text-white text-3xl font-extrabold"
+        style={{ "--stroke-color": "#040F4F" }}
+        dangerouslySetInnerHTML={{ __html: qs1Text }}
       />
 
       <motion.img
@@ -196,23 +200,54 @@ const GameScreen = () => {
         isSettled={isSettled && falseClicks === 3}
       />
 
-      <div className="absolute bottom-15 left-1/2 -translate-x-1/2 flex gap-8 z-50 items-center justify-center">
-        <motion.img
-          src="/false.png"
-          alt="False"
-          className="max-w-[70%] max-h-[40%] w-auto h-auto transition-all duration-[20ms] cursor-pointer"
+      <div className="absolute bottom-15 left-57 -translate-x-1/2 flex gap-4 z-50 items-center justify-between w-full">
+        {/* False Button */}
+        <motion.div
+          className="relative"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          onClick={() => handleButtonClick("false")}
-        />
-        <motion.img
-          src="/true.png"
-          alt="True"
-          className="max-w-[70%] max-h-[40%] w-auto h-auto transition-all duration-[20ms] cursor-pointer"
+          transition={{ duration: 0.02 }}
+        >
+          <motion.img
+            src="/blueb.png"
+            alt="False"
+            className="max-w-[70%] max-h-[40%] w-auto h-auto transition-all duration-[20ms] cursor-pointer"
+            onClick={() => handleButtonClick("false")}
+          />
+          <motion.div
+            className="alkalami-regular stroke-custom absolute text-3xl font-bold text-white top-3/5 left-17 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            style={{ "--stroke-color": "#0C4ED0" }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ duration: 0.02 }}
+          >
+            False
+          </motion.div>
+        </motion.div>
+
+        {/* True Button */}
+        <motion.div
+          className="relative"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          onClick={() => handleButtonClick("true")}
-        />
+          transition={{ duration: 0.02 }}
+        >
+          <motion.img
+            src="/blueb.png"
+            alt="True"
+            className="max-w-[70%] max-h-[40%] w-auto h-auto transition-all duration-[20ms] cursor-pointer"
+            onClick={() => handleButtonClick("true")}
+          />
+          <motion.div
+            className="alkalami-regular stroke-custom absolute text-3xl font-bold text-white top-3/5 left-17 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            style={{ "--stroke-color": "#0C4ED0" }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ duration: 0.02 }}
+          >
+            True
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );
