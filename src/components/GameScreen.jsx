@@ -153,101 +153,104 @@ const GameScreen = () => {
 
   return (
     <div
-      className="mx-auto w-full max-w-[393px] h-[calc(100vw*(852/393))] max-h-[852px] bg-cover bg-no-repeat bg-center relative transition-opacity duration-500"
-      style={{ backgroundImage: "url('/playpage.png')" }}
+      className="fixed inset-0 bg-cover bg-no-repeat bg-center overflow-y-auto custom-scrollbar"
+      style={{ backgroundImage: `url('/superbg2.jpg')` }}
     >
       <div
-        className="stroke-custom absolute left-1/2 w-90 h-60 -translate-x-1/2 top-[15%] text-center text-white text-3xl font-extrabold"
-        style={{ "--stroke-color": "#040F4F" }}
-        dangerouslySetInnerHTML={{ __html: qs1Text }}
-      />
+        className="mx-auto w-full max-w-[393px] h-[calc(100vw*(852/393))] max-h-[852px] bg-cover bg-no-repeat bg-center relative transition-opacity duration-500"
+        style={{ backgroundImage: "url('/playage.png')" }}
+      >
+        <div
+          className="stroke-custom absolute left-1/2 w-90 h-60 -translate-x-1/2 top-[15%] text-center text-white text-3xl font-extrabold"
+          style={{ "--stroke-color": "#040F4F" }}
+          dangerouslySetInnerHTML={{ __html: qs1Text }}
+        />
 
-      <motion.img
-        src="/plant.png"
-        alt="Plant"
-        className="absolute left-1/2 -translate-x-1/2 w-80 h-60 top-[38%]"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      />
-
-      {bubbleSide && (
         <motion.img
-          src="/bubble.png"
-          alt="Bubble"
-          className={`absolute w-[80px] h-[110px] z-10 ${
-            bubbleSide === "left" ? "left-22" : "right-20"
-          }`}
-          style={{ top: `calc(85% + ${bubbleYOffset}px)` }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 2 }}
+          src="/plant.png"
+          alt="Plant"
+          className="absolute left-1/2 -translate-x-1/2 w-80 h-60 top-[38%]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         />
-      )}
 
-      <RotatingImageGroup
-        side="left"
-        color="rr"
-        config={leftConfig}
-        yOffsets={rrYOffsets}
-        isSettled={isSettled && trueClicks === 3}
-      />
-      <RotatingImageGroup
-        side="right"
-        color="gr"
-        config={rightConfig}
-        yOffsets={grYOffsets}
-        isSettled={isSettled && falseClicks === 3}
-      />
-
-      <div className="absolute bottom-15 left-57 -translate-x-1/2 flex gap-4 z-50 items-center justify-between w-full">
-        {/* False Button */}
-        <motion.div
-          className="relative"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          transition={{ duration: 0.02 }}
-        >
+        {bubbleSide && (
           <motion.img
-            src="/blueb.png"
-            alt="False"
-            className="max-w-[70%] max-h-[40%] w-auto h-auto transition-all duration-[20ms] cursor-pointer"
-            onClick={() => handleButtonClick("false")}
+            src="/bubble.png"
+            alt="Bubble"
+            className={`absolute w-[80px] h-[110px] z-10 ${
+              bubbleSide === "left" ? "left-22" : "right-20"
+            }`}
+            style={{ top: `calc(85% + ${bubbleYOffset}px)` }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 2 }}
+            transition={{ duration: 0.5 }}
           />
+        )}
+
+        <RotatingImageGroup
+          side="left"
+          color="rr"
+          config={leftConfig}
+          yOffsets={rrYOffsets}
+          isSettled={isSettled && trueClicks === 3}
+        />
+        <RotatingImageGroup
+          side="right"
+          color="gr"
+          config={rightConfig}
+          yOffsets={grYOffsets}
+          isSettled={isSettled && falseClicks === 3}
+        />
+
+        <div className="absolute bottom-15 left-57 -translate-x-1/2 flex gap-4 z-50 items-center justify-between w-full">
           <motion.div
-            className="alkalami-regular stroke-custom absolute text-3xl font-bold text-white top-3/5 left-17 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-            style={{ "--stroke-color": "#0C4ED0" }}
+            className="relative"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.02 }}
           >
-            False
+            <motion.img
+              src="/blueb.png"
+              alt="False"
+              className="max-w-[70%] max-h-[40%] w-auto h-auto transition-all duration-[20ms] cursor-pointer"
+              onClick={() => handleButtonClick("false")}
+            />
+            <motion.div
+              className="alkalami-regular stroke-custom absolute text-3xl font-bold text-white top-3/5 left-17 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              style={{ "--stroke-color": "#0C4ED0" }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.02 }}
+            >
+              False
+            </motion.div>
           </motion.div>
-        </motion.div>
 
-        {/* True Button */}
-        <motion.div
-          className="relative"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          transition={{ duration: 0.02 }}
-        >
-          <motion.img
-            src="/blueb.png"
-            alt="True"
-            className="max-w-[70%] max-h-[40%] w-auto h-auto transition-all duration-[20ms] cursor-pointer"
-            onClick={() => handleButtonClick("true")}
-          />
           <motion.div
-            className="alkalami-regular stroke-custom absolute text-3xl font-bold text-white top-3/5 left-17 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-            style={{ "--stroke-color": "#0C4ED0" }}
+            className="relative"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.02 }}
           >
-            True
+            <motion.img
+              src="/blueb.png"
+              alt="True"
+              className="max-w-[70%] max-h-[40%] w-auto h-auto transition-all duration-[20ms] cursor-pointer"
+              onClick={() => handleButtonClick("true")}
+            />
+            <motion.div
+              className="alkalami-regular stroke-custom absolute text-3xl font-bold text-white top-3/5 left-17 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              style={{ "--stroke-color": "#0C4ED0" }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.02 }}
+            >
+              True
+            </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
