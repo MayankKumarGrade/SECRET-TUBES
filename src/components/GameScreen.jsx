@@ -9,7 +9,7 @@ const RotatingImageGroup = ({ side, color, config, yOffsets, isSettled }) =>
         key={`${side}-${index}`}
         src={`/${color}.png`}
         alt="Rotating Image"
-        className="absolute w-[101px] h-[55px] object-cover z-50"
+        className="absolute w-[101px] h-[55px] object-cover z-20"
         style={{
           [side]: position,
           top: `calc(${top} + ${yOffsets[index]}px)`,
@@ -123,7 +123,7 @@ const GameScreen = () => {
     const updateCounter = isfalseAction ? setTrueClicks : setFalseClicks;
     updateCounter(prev => prev + 1);
 
-    const offsetUpdates = isfalseAction ? [-70, -65, -105] : [-75, -70, -105];
+    const offsetUpdates = isfalseAction ? [-75, -70, -105] : [-75, -75, -105];
 
     const updateOffsets = isfalseAction ? setRrYOffsets : setGrYOffsets;
     updateOffsets(prev => [
@@ -191,12 +191,12 @@ const GameScreen = () => {
         <motion.img
           src="/plant1.png"
           alt="Plant"
-          className="absolute w-[35.29px] h-[42.55px] left-[65.86px] top-[409.73px]"
+          className="absolute w-[35.29px] h-[42.55px] left-[65.86px] top-[409.73px] z-50"
         />
         <motion.img
           src="/plant2.png"
           alt="Plant"
-          className="flex flex-col items-start p-0 gap-[10px] absolute w-[29px] left-[295px] top-[404px]"
+          className="flex flex-col items-start p-0 gap-[10px] absolute w-[29px] left-[295px] top-[404px] z-50"
         />
 
         {bubbleSide &&
