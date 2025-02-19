@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-const RotatingImageGroup = ({ side, color, config, yOffsets, isSettled }) => (
+const RotatingImageGroup = ({ side, color, config, yOffsets, isSettled }) =>
   <div className="z-10">
-    {config.map(({ position, top, initialRotate, animateRotate, y }, index) => (
+    {config.map(({ position, top, initialRotate, animateRotate, y }, index) =>
       <motion.img
         key={`${side}-${index}`}
         src={`/${color}.png`}
@@ -23,9 +23,8 @@ const RotatingImageGroup = ({ side, color, config, yOffsets, isSettled }) => (
         }}
         transition={{ type: "tween", duration: 0.5 }}
       />
-    ))}
-  </div>
-);
+    )}
+  </div>;
 
 RotatingImageGroup.propTypes = {
   side: PropTypes.oneOf(["left", "right"]).isRequired,
@@ -49,7 +48,7 @@ const GameScreen = () => {
   const [rrYOffsets, setRrYOffsets] = useState([0, 0, 0]);
   const [grYOffsets, setGrYOffsets] = useState([0, 0, 0]);
   const [qs1Text, setQs1Text] = useState(
-    "The Sun is the closest star to Earth?"
+    "<span class='text-yellow-500 text-3xl changa-one-regular'>(1/12)</span><br/>The Sun is the closest star to Earth?"
   );
   const [isSettled, setIsSettled] = useState(false);
   const [bubbleYOffset, setBubbleYOffset] = useState(0);
@@ -103,7 +102,7 @@ const GameScreen = () => {
     }
   ];
 
-  const handleButtonClick = (type) => {
+  const handleButtonClick = type => {
     if (isSettled) return;
 
     const isfalseAction = type === "false";
@@ -122,19 +121,19 @@ const GameScreen = () => {
     }
 
     const updateCounter = isfalseAction ? setTrueClicks : setFalseClicks;
-    updateCounter((prev) => prev + 1);
+    updateCounter(prev => prev + 1);
 
     const offsetUpdates = isfalseAction ? [-70, -65, -105] : [-75, -70, -105];
 
     const updateOffsets = isfalseAction ? setRrYOffsets : setGrYOffsets;
-    updateOffsets((prev) => [
+    updateOffsets(prev => [
       prev[0] + offsetUpdates[0],
       prev[1] + offsetUpdates[1],
       prev[2] + offsetUpdates[2]
     ]);
 
     setBubbleSide(isfalseAction ? "left" : "right");
-    setBubbleYOffset((prev) => prev - 50);
+    setBubbleYOffset(prev => prev - 50);
 
     if (currentCounter + 1 === 3) {
       setIsSettled(true);
@@ -143,8 +142,8 @@ const GameScreen = () => {
       const completionTimeout = setTimeout(() => {
         setQs1Text(
           isfalseAction
-            ? "<span class='text-yellow-500 text-3xl changa-one-regular'>You got 0 coin</span><br/><span class='text-5xl font-extrabold bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Noooo!!</span>"
-            : "<span class='text-yellow-500 text-3xl changa-one-regular'>You got 1 coin</span><br/><span class='text-5xl font-extrabold bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Congratulations</span>"
+            ? "<span class='text-yellow-500 pointer-events-none text-3xl changa-one-regular'>You got 0 coin</span><br/><span class='text-5xl font-extrabold pointer-events-none bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Noooo!!</span>"
+            : "<span class='text-yellow-500 pointer-events-none text-3xl changa-one-regular'>You got 1 coin</span><br/><span class='text-5xl font-extrabold pointer-events-none bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Congratulations</span>"
         );
 
         const resetTimeout = setTimeout(() => {
@@ -152,7 +151,9 @@ const GameScreen = () => {
           setFalseClicks(0);
           setRrYOffsets([0, 0, 0]);
           setGrYOffsets([0, 0, 0]);
-          setQs1Text("The Sun is the closest star to Earth?");
+          setQs1Text(
+            "<span class='pointer-events-none'>The Sun is the closest star to Earth?</span>"
+          );
           setIsSettled(false);
           setBubbleYOffset(0);
         }, 4000);
@@ -187,20 +188,29 @@ const GameScreen = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         />
+        <motion.img
+          src="/plant1.png"
+          alt="Plant"
+          className="absolute w-[35.29px] h-[42.55px] left-[65.86px] top-[409.73px]"
+        />
+        <motion.img
+          src="/plant2.png"
+          alt="Plant"
+          className="flex flex-col items-start p-0 gap-[10px] absolute w-[29px] left-[295px] top-[404px]"
+        />
 
-        {bubbleSide && (
+        {bubbleSide &&
           <motion.img
             src="/bubble.png"
             alt="Bubble"
-            className={`absolute w-[80px] h-[110px] z-10 ${
-              bubbleSide === "left" ? "left-22" : "right-20"
-            }`}
+            className={`absolute w-[80px] h-[110px] z-10 ${bubbleSide === "left"
+              ? "left-22"
+              : "right-20"}`}
             style={{ top: `calc(85% + ${bubbleYOffset}px)` }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 2 }}
             transition={{ duration: 0.5 }}
-          />
-        )}
+          />}
 
         <RotatingImageGroup
           side="left"
@@ -231,13 +241,13 @@ const GameScreen = () => {
               onClick={() => handleButtonClick("false")}
             />
             <motion.div
-              className="alkalami-regular stroke-custom absolute text-3xl font-bold text-white top-3/5 left-17 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              className="alkalami-regular stroke-custom absolute text-2xl font-bold text-white top-3/5 left-17 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
               style={{ "--stroke-color": "#0C4ED0" }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               transition={{ duration: 0.02 }}
             >
-              False
+              FAlSE
             </motion.div>
           </motion.div>
 
@@ -254,13 +264,13 @@ const GameScreen = () => {
               onClick={() => handleButtonClick("true")}
             />
             <motion.div
-              className="alkalami-regular stroke-custom absolute text-3xl font-bold text-white top-3/5 left-17 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              className="alkalami-regular stroke-custom absolute text-2xl font-bold text-white top-3/5 left-17 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
               style={{ "--stroke-color": "#0C4ED0" }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               transition={{ duration: 0.02 }}
             >
-              True
+              TRUE
             </motion.div>
           </motion.div>
         </div>
