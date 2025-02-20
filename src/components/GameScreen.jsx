@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-const RotatingImageGroup = ({ side, color, config, yOffsets, isSettled }) =>
+const RotatingImageGroup = ({ side, color, config, yOffsets, isSettled }) => (
   <div className="z-10">
-    {config.map(({ position, top, initialRotate, animateRotate, y }, index) =>
+    {config.map(({ position, top, initialRotate, animateRotate, y }, index) => (
       <motion.img
         key={`${side}-${index}`}
         src={`/${color}.png`}
@@ -23,8 +23,9 @@ const RotatingImageGroup = ({ side, color, config, yOffsets, isSettled }) =>
         }}
         transition={{ type: "tween", duration: 0.5 }}
       />
-    )}
-  </div>;
+    ))}
+  </div>
+);
 
 RotatingImageGroup.propTypes = {
   side: PropTypes.oneOf(["left", "right"]).isRequired,
@@ -48,7 +49,7 @@ const GameScreen = () => {
   const [rrYOffsets, setRrYOffsets] = useState([0, 0, 0]);
   const [grYOffsets, setGrYOffsets] = useState([0, 0, 0]);
   const [qs1Text, setQs1Text] = useState(
-    "<span class='text-yellow-500 text-3xl changa-one-regular'>(1/12)</span><br/>The Sun is the closest star to Earth?"
+    "<span class='text-yellow-500 text-2xl sm:text-3xl lg:text-4xl changa-one-regular'>(1/12)</span><br/>The Sun is the closest star to Earth?"
   );
   const [isSettled, setIsSettled] = useState(false);
   const [bubbleYOffset, setBubbleYOffset] = useState(0);
@@ -56,53 +57,53 @@ const GameScreen = () => {
 
   const leftConfig = [
     {
-      position: "80px",
-      top: "75%",
+      position: "10.18%",
+      top: "75.19%",
       initialRotate: 11.37,
-      animateRotate: 31.37,
+      animateRotate: -30,
       y: -20
     },
     {
-      position: "60px",
+      position: "11.45%",
       top: "80%",
       initialRotate: -18.92,
-      animateRotate: 1.08,
+      animateRotate: 12.08,
       y: -20
     },
     {
-      position: "70px",
-      top: "77%",
+      position: "17.81%",
+      top: "76.99%",
       initialRotate: 12,
-      animateRotate: 35,
+      animateRotate: -5,
       y: -10
     }
   ];
 
   const rightConfig = [
     {
-      position: "60px",
-      top: "75%",
+      position: "8.91%",
+      top: "74.69%",
       initialRotate: 11.37,
-      animateRotate: 20,
+      animateRotate: 5,
       y: -20
     },
     {
-      position: "40px",
+      position: "11.45%",
       top: "80%",
       initialRotate: 18.92,
       animateRotate: 12.08,
       y: -20
     },
     {
-      position: "70px",
+      position: "17.81%",
       top: "77%",
       initialRotate: 0,
-      animateRotate: -20,
+      animateRotate: -2,
       y: -10
     }
   ];
 
-  const handleButtonClick = type => {
+  const handleButtonClick = (type) => {
     if (isSettled) return;
 
     const isfalseAction = type === "false";
@@ -121,19 +122,19 @@ const GameScreen = () => {
     }
 
     const updateCounter = isfalseAction ? setTrueClicks : setFalseClicks;
-    updateCounter(prev => prev + 1);
+    updateCounter((prev) => prev + 1);
 
-    const offsetUpdates = isfalseAction ? [-75, -70, -105] : [-75, -75, -105];
+    const offsetUpdates = isfalseAction ? [-75, -75, -105] : [-95, -79, -105];
 
     const updateOffsets = isfalseAction ? setRrYOffsets : setGrYOffsets;
-    updateOffsets(prev => [
-      prev[0] + offsetUpdates[0],
-      prev[1] + offsetUpdates[1],
+    updateOffsets((prev) => [
+      prev[0] + offsetUpdates[1],
+      prev[1] + offsetUpdates[2],
       prev[2] + offsetUpdates[2]
     ]);
 
     setBubbleSide(isfalseAction ? "left" : "right");
-    setBubbleYOffset(prev => prev - 50);
+    setBubbleYOffset((prev) => prev - 50);
 
     if (currentCounter + 1 === 3) {
       setIsSettled(true);
@@ -142,8 +143,8 @@ const GameScreen = () => {
       const completionTimeout = setTimeout(() => {
         setQs1Text(
           isfalseAction
-            ? "<span class='text-yellow-500 pointer-events-none text-3xl changa-one-regular'>You got 0 coin</span><br/><span class='text-5xl font-extrabold pointer-events-none bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Noooo!!</span>"
-            : "<span class='text-yellow-500 pointer-events-none text-3xl changa-one-regular'>You got 1 coin</span><br/><span class='text-5xl font-extrabold pointer-events-none bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Congratulations</span>"
+            ? "<span class='text-yellow-500 pointer-events-none text-2xl sm:text-3xl lg:text-4xl changa-one-regular'>You got 0 coin</span><br/><span class='text-4xl sm:text-5xl lg:text-6xl font-extrabold pointer-events-none bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Noooo!!</span>"
+            : "<span class='text-yellow-500 pointer-events-none text-2xl sm:text-3xl lg:text-4xl changa-one-regular'>You got 1 coin</span><br/><span class='text-4xl sm:text-5xl lg:text-6xl font-extrabold pointer-events-none bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Congratulations</span>"
         );
 
         const resetTimeout = setTimeout(() => {
@@ -152,7 +153,7 @@ const GameScreen = () => {
           setRrYOffsets([0, 0, 0]);
           setGrYOffsets([0, 0, 0]);
           setQs1Text(
-            "<span class='pointer-events-none'>The Sun is the closest star to Earth?</span>"
+            "<span class='text-yellow-500 pointer-events-none text-2xl sm:text-3xl lg:text-4xl changa-one-regular'>(1/12)</span><br/><span class='pointer-events-none text-2xl sm:text-3xl lg:text-4xl changa-one-regular'>The Sun is the closest star to Earth?</span>"
           );
           setIsSettled(false);
           setBubbleYOffset(0);
@@ -166,16 +167,10 @@ const GameScreen = () => {
   };
 
   return (
-    <div
-      className="fixed inset-0 bg-cover bg-no-repeat bg-center overflow-y-auto custom-scrollbar"
-      style={{ backgroundImage: `url('/superbg2.jpg')` }}
-    >
-      <div
-        className="mx-auto w-full max-w-[393px] h-[calc(100vw*(852/393))] max-h-[852px] bg-cover bg-no-repeat bg-center relative transition-opacity duration-500"
-        style={{ backgroundImage: "url('/playage.png')" }}
-      >
+    <div className="fixed inset-0 bg-[url('/playpage.png')] sm:bg-[url('/superbg2.jpg')] bg-cover bg-no-repeat bg-center overflow-y-auto custom-scrollbar">
+      <div className="mx-auto w-full max-w-[393px] h-[calc(100vw*(852/393))] max-h-[852px] bg-cover bg-no-repeat bg-center relative transition-opacity duration-500">
         <div
-          className="stroke-custom absolute left-1/2 w-90 h-60 -translate-x-1/2 top-[15%] text-center text-white text-3xl font-extrabold"
+          className="stroke-custom absolute left-1/2 w-90 h-60 -translate-x-1/2 top-[15%] text-center text-white text-2xl sm:text-3xl lg:text-4xl font-extrabold"
           style={{ "--stroke-color": "#040F4F" }}
           dangerouslySetInnerHTML={{ __html: qs1Text }}
         />
@@ -183,7 +178,7 @@ const GameScreen = () => {
         <motion.img
           src="/plant.png"
           alt="Plant"
-          className="absolute left-1/2 -translate-x-1/2 w-80 h-60 top-[38%]"
+          className="absolute left-1/2 -translate-x-1/2 w-[81.42%] top-[38%]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -191,26 +186,36 @@ const GameScreen = () => {
         <motion.img
           src="/plant1.png"
           alt="Plant"
-          className="absolute w-[35.29px] h-[42.55px] left-[65.86px] top-[409.73px] z-50"
+          className="absolute left-[17%] top-[48.09%] w-[7.98%] z-50"
         />
         <motion.img
           src="/plant2.png"
           alt="Plant"
-          className="flex flex-col items-start p-0 gap-[10px] absolute w-[29px] left-[295px] top-[404px] z-50"
+          className="absolute left-[74.9%] top-[47.22%] w-[7.38%] z-50"
         />
-
-        {bubbleSide &&
+        <motion.img
+          src="/lplants.png"
+          alt="Plant"
+          className="absolute left-[22.39%] top-[38.15%] w-[27.74%] z-50"
+        />
+        <motion.img
+          src="/rplants.png"
+          alt="Plant"
+          className="absolute left-[49.87%] top-[38.15%] w-[27.48%] z-50"
+        />
+        {bubbleSide && (
           <motion.img
             src="/bubble.png"
             alt="Bubble"
-            className={`absolute w-[80px] h-[110px] z-10 ${bubbleSide === "left"
-              ? "left-22"
-              : "right-20"}`}
-            style={{ top: `calc(85% + ${bubbleYOffset}px)` }}
+            className={`absolute w-[35%] h-[30%] z-10 ${
+              bubbleSide === "left" ? "left-[10%]" : "right-[10%]"
+            }`}
+            style={{ top: `calc(80% + ${bubbleYOffset}px)` }}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 2 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-          />}
+          />
+        )}
 
         <RotatingImageGroup
           side="left"
@@ -227,7 +232,7 @@ const GameScreen = () => {
           isSettled={isSettled && falseClicks === 3}
         />
 
-        <div className="absolute bottom-15 left-57 -translate-x-1/2 flex gap-4 z-50 items-center justify-between w-full">
+        <div className="absolute bottom-15 left-[60%] -translate-x-1/2 flex z-50 items-center justify-between w-full px-4">
           <motion.div
             className="relative"
             whileHover={{ scale: 1.1 }}
@@ -237,11 +242,11 @@ const GameScreen = () => {
             <motion.img
               src="/blueb.png"
               alt="False"
-              className="max-w-[70%] max-h-[40%] w-auto h-auto transition-all duration-[20ms] cursor-pointer"
+              className="w-[70%] h-auto transition-all duration-[20ms] cursor-pointer"
               onClick={() => handleButtonClick("false")}
             />
             <motion.div
-              className="alkalami-regular stroke-custom absolute text-2xl font-bold text-white top-3/5 left-17 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              className="alkalami-regular stroke-custom absolute text-xl sm:text-2xl font-bold text-white top-3/5 left-[35%] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
               style={{ "--stroke-color": "#0C4ED0" }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -260,11 +265,11 @@ const GameScreen = () => {
             <motion.img
               src="/blueb.png"
               alt="True"
-              className="max-w-[70%] max-h-[40%] w-auto h-auto transition-all duration-[20ms] cursor-pointer"
+              className="w-[70%] h-auto transition-all duration-[20ms] cursor-pointer"
               onClick={() => handleButtonClick("true")}
             />
             <motion.div
-              className="alkalami-regular stroke-custom absolute text-2xl font-bold text-white top-3/5 left-17 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              className="alkalami-regular stroke-custom absolute text-xl sm:text-2xl font-bold text-white top-3/5 left-[35%] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
               style={{ "--stroke-color": "#0C4ED0" }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
