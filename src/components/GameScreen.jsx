@@ -188,9 +188,9 @@ const GameScreen = () => {
           alt="Plant"
           className="absolute left-[17%] top-[48.09%] w-[7.98%]"
           initial={{ opacity: 0, zIndex: 0 }}
-          animate={{ 
-            opacity: (trueClicks === 3 || falseClicks === 3) ? 1 : 0,
-            zIndex: (trueClicks === 3 || falseClicks === 3) ? 50 : 0
+          animate={{
+            opacity: trueClicks === 3 || falseClicks === 3 ? 1 : 0,
+            zIndex: trueClicks === 3 || falseClicks === 3 ? 50 : 0
           }}
           transition={{ duration: 0.5 }}
         />
@@ -199,9 +199,9 @@ const GameScreen = () => {
           alt="Plant"
           className="absolute left-[74.9%] top-[47.22%] w-[7.38%]"
           initial={{ opacity: 0, zIndex: 0 }}
-          animate={{ 
-            opacity: (trueClicks === 3 || falseClicks === 3) ? 1 : 0,
-            zIndex: (trueClicks === 3 || falseClicks === 3) ? 50 : 0
+          animate={{
+            opacity: trueClicks === 3 || falseClicks === 3 ? 1 : 0,
+            zIndex: trueClicks === 3 || falseClicks === 3 ? 50 : 0
           }}
           transition={{ duration: 0.5 }}
         />
@@ -210,9 +210,9 @@ const GameScreen = () => {
           alt="Plant"
           className="absolute left-[22.39%] top-[38.15%] w-[27.74%]"
           initial={{ opacity: 0, zIndex: 0 }}
-          animate={{ 
-            opacity: (trueClicks === 3 || falseClicks === 3) ? 1 : 0,
-            zIndex: (trueClicks === 3 || falseClicks === 3) ? 50 : 0
+          animate={{
+            opacity: trueClicks === 3 || falseClicks === 3 ? 1 : 0,
+            zIndex: trueClicks === 3 || falseClicks === 3 ? 50 : 0
           }}
           transition={{ duration: 0.5 }}
         />
@@ -221,9 +221,9 @@ const GameScreen = () => {
           alt="Plant"
           className="absolute left-[49.87%] top-[38.15%] w-[27.48%]"
           initial={{ opacity: 0, zIndex: 0 }}
-          animate={{ 
-            opacity: (trueClicks === 3 || falseClicks === 3) ? 1 : 0,
-            zIndex: (trueClicks === 3 || falseClicks === 3) ? 50 : 0
+          animate={{
+            opacity: trueClicks === 3 || falseClicks === 3 ? 1 : 0,
+            zIndex: trueClicks === 3 || falseClicks === 3 ? 50 : 0
           }}
           transition={{ duration: 0.5 }}
         />

@@ -12,13 +12,8 @@ const GameUI = ({
   showToast
 }) => {
   return (
-    <div
-      className="fixed bg-[url('/startpage.png')] sm:bg-[url('/superbg.jpeg')] inset-0 bg-cover bg-no-repeat bg-center overflow-y-auto custom-scrollbar"
-    >
-      <div
-        className="mx-auto w-full max-w-[393px] h-[calc(100vw*(852/393))] max-h-[852px] bg-cover bg-no-repeat bg-center relative transition-opacity duration-500"
-        style={{ backgroundImage: `url('/startpge.png')` }}
-      >
+    <div className="fixed bg-[url('/startpage.png')] sm:bg-[url('/superbg.jpeg')] inset-0 bg-cover bg-no-repeat bg-center overflow-y-auto custom-scrollbar">
+      <div className="mx-auto w-full max-w-[393px] h-[calc(100vw*(852/393))] max-h-[852px] bg-cover bg-no-repeat bg-center relative transition-opacity duration-500">
         <div className="absolute inset-0 flex items-center justify-center">
           <img
             src={isClicked ? "/aural.png" : "/aura.png"}
