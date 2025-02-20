@@ -143,8 +143,8 @@ const GameScreen = () => {
       const completionTimeout = setTimeout(() => {
         setQs1Text(
           isfalseAction
-            ? "<span class='text-yellow-500 pointer-events-none text-2xl sm:text-3xl lg:text-4xl changa-one-regular'>You got 0 coin</span><br/><span class='text-4xl sm:text-5xl lg:text-6xl font-extrabold pointer-events-none bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Noooo!!</span>"
-            : "<span class='text-yellow-500 pointer-events-none text-2xl sm:text-3xl lg:text-4xl changa-one-regular'>You got 1 coin</span><br/><span class='text-4xl sm:text-5xl lg:text-6xl font-extrabold pointer-events-none bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Congratulations</span>"
+            ? "<span class='text-yellow-500 pointer-events-none text-2xl sm:text-3xl lg:text-4xl changa-one-regular'>You got 0 coin.</span><br/><span class='text-4xl sm:text-5xl lg:text-6xl font-extrabold pointer-events-none bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Noooo!!</span>"
+            : "<span class='text-yellow-500 pointer-events-none text-2xl sm:text-3xl lg:text-4xl changa-one-regular'>You got 1 coin.</span><br/><span class='text-4xl sm:text-5xl lg:text-6xl font-extrabold pointer-events-none bg-gradient-to-b from-[#82F7F5] to-[#0D52A0] text-transparent bg-clip-text changa-one-regular'>Congratulations.</span>"
         );
 
         const resetTimeout = setTimeout(() => {

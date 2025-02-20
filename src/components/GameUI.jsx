@@ -13,8 +13,7 @@ const GameUI = ({
 }) => {
   return (
     <div
-      className="fixed inset-0 bg-cover bg-no-repeat bg-center overflow-y-auto custom-scrollbar"
-      style={{ backgroundImage: `url('/superbg.jpeg')` }}
+      className="fixed bg-[url('/startpage.png')] sm:bg-[url('/superbg.jpeg')] inset-0 bg-cover bg-no-repeat bg-center overflow-y-auto custom-scrollbar"
     >
       <div
         className="mx-auto w-full max-w-[393px] h-[calc(100vw*(852/393))] max-h-[852px] bg-cover bg-no-repeat bg-center relative transition-opacity duration-500"
@@ -81,7 +80,7 @@ const GameUI = ({
                 className="max-w-[20%] max-h-[30%] w-auto h-auto"
               />
 
-              <p className="text-white text-lg font-bold text-center alkalami-regular">
+              <p className="text-white text-lg font-bold text-center alkalami-regular pointer-events-none">
                 Keep pushing until tubes rise <br /> under pressure and then get{" "}
                 <br /> stuck on a plant.
               </p>
