@@ -16,6 +16,15 @@
   font-family: "Changa One", serif;
 }
 
+.play-start-button:hover {
+  transform: scale(1.1);
+}
+
+.play-start-button {
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));

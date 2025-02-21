@@ -29,15 +29,10 @@ const GameUI = ({
               }`}
             />
             <div
-              className={`relative flex items-center justify-center transition-all duration-[1000ms] ${
+              className={`relative flex items-center justify-center transition-all duration-[1000ms] play-start-button ${
                 isClicked ? "transform translate-x-full opacity-0" : ""
               }`}
-              style={{ cursor: "pointer", transition: "transform 0.2s" }}
               onClick={showStart ? handleStartClick : handlePlayClick}
-              onMouseOver={(e) =>
-                (e.currentTarget.style.transform = "scale(1.1)")
-              }
-              onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
               <img
                 src="/goldenb.png"
@@ -62,7 +57,7 @@ const GameUI = ({
                   className="max-w-[85%] max-h-[75%] w-auto h-auto"
                 />
                 <p
-                  className="alkalami-regular stroke-custom absolute text-3xl font-bold text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                  className="alkalami-regular stroke-custom absolute text-3xl font-bold text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                   style={{ "--stroke-color": "#0C4ED0" }}
                 >
                   Push
